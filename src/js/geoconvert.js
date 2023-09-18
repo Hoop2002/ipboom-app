@@ -1,10 +1,10 @@
 
 $(document).on('click', '.button_form', function(event){
-    const keyApi = document.getElementById('keyApi').value;
+    const keyApi = document.getElementById('keyApi');
     const csvFile = document.getElementById('csvFile');
     const file = csvFile.files[0];
     const fileName = file.name
-    console.log(file)
+
     if(keyApi == '' || typeof keyApi == "undefined") {
         alert("API KEY Пуст!")
     }
@@ -18,11 +18,17 @@ $(document).on('click', '.button_form', function(event){
         const xhr = new XMLHttpRequest();
         const formData = new FormData();
 
-        formData.append('file', file);
-
-        console.log(formData)
-        xhr.open('POST', '/file/upload-file');
-        xhr.send(formData);
+        formData.append('file', file)
+        
+        
+        fetch(`/geoconvert?key=${keyApi.value}`, {
+            method: 'POST',
+            body: formData,
+        }).then(response => {
+            console.log(response);
+        }).catch(error => {
+            console.log(error)
+        });
     }
 
 })
