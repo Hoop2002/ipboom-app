@@ -15,4 +15,15 @@ def geo_convert(api_key: str, file: bytes):
     
     for i in dataframe.values:
        contract_number = i[0]
-       print(contract_number)
+       unrestricted_value = i[6]
+       latitude = float
+       longitude = float
+
+       try:
+          g = geolocator.geocode(u'{unrestricted_value}'.format(unrestricted_value=unrestricted_value))
+          latitude = g.latitude
+          longitude = g.longitude
+       except Exception as er:
+           print(er)
+
+        
