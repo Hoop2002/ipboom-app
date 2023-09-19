@@ -2,16 +2,20 @@
 $(document).on('click', '.button_form', function(event){
     const keyApi = document.getElementById('keyApi');
     const csvFile = document.getElementById('csvFile');
+    if(keyApi.value == '' || typeof keyApi.value == "undefined") {
+        alert("API KEY Пуст!")
+        window.stop()
+    }
+     if(typeof csvFile.files[0] == "undefined"){
+        alert("Не выбран файл!");
+        window.stop()
+    }
+
     const file = csvFile.files[0];
     const fileName = file.name
-
-    if(keyApi == '' || typeof keyApi == "undefined") {
-        alert("API KEY Пуст!")
-    }
-     if(typeof file == "undefined"){
-        alert("Не выбран файл!");
-    }
-    else if (file.type != "text/csv"){
+    console.log(keyApi)
+   
+    if (file.type != "text/csv"){
         alert("Выбранный файл неправильного формата  (необходим .csv)");
     }
     else{
