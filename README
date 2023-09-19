@@ -1,6 +1,6 @@
 Устанновка: 
     - скачать python3 >3.7 vr.
-    - склонировать проект коммандрой  git clone https://github.com/Hoop2002/ipboom-app
+    - склонировать проект коммандой  git clone https://github.com/Hoop2002/ipboom-app
     - создать виртуальное окружение  python3 -m venv .venv
     - активировать виртуальное окружение source .venv/bin/activate
     - установить зависимости pip install -r requirements.txt
