@@ -8,14 +8,14 @@ $(document).on('click', '.button_form', function(event){
     if(keyApi == '' || typeof keyApi == "undefined") {
         alert("API KEY Пуст!")
     }
-    else if(typeof file == "undefined"){
+     if(typeof file == "undefined"){
         alert("Не выбран файл!");
     }
     else if (file.type != "text/csv"){
         alert("Выбранный файл неправильного формата  (необходим .csv)");
     }
     else{
-        const xhr = new XMLHttpRequest();
+         
         const formData = new FormData();
 
         formData.append('file', file)
@@ -24,9 +24,16 @@ $(document).on('click', '.button_form', function(event){
         fetch(`/geoconvert?key=${keyApi.value}`, {
             method: 'POST',
             body: formData,
-        }).then(response => {
-            console.log(response);
-        }).catch(error => {
+        })
+        .then(response => response.json())
+        .then(
+          data => {
+            var link = document.createElement("a");
+            link.setAttribute('href', `../file/geoconvert/${data.file_path}`)
+            link.setAttribute('download','download');
+            onload=link.click();
+        }
+        ).catch(error => {
             console.log(error)
         });
     }
