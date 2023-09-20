@@ -1,6 +1,7 @@
 import io
 import os
 import csv
+import time
 import datetime
 import pandas as pd 
 from geopy.geocoders import Yandex
@@ -42,12 +43,26 @@ def geo_convert(api_key: str, file: bytes):
                     u"Широта": latitude,
                     u"Долгота":longitude,
                     u"Описание": contract_number,
-                    u"Подпись": contract_number,
+                    u"Подпись": u" ",
                     u"Номер": num
                 })
 
             except Exception as er:
                 print(er)
+
+                time.sleep(4)
+
+                g = geolocator.geocode(u'{unrestricted_value}'.format(unrestricted_value=unrestricted_value))
+                latitude = g.latitude
+                longitude = g.longitude
+                
+                new_data.append({
+                    u"Широта": latitude,
+                    u"Долгота":longitude,
+                    u"Описание": contract_number,
+                    u"Подпись": u" ",
+                    u"Номер": num
+                })
         
         writer_csv.writerows(new_data)
         new_data = []
