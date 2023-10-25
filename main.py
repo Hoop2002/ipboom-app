@@ -8,22 +8,21 @@ from app.geocomvert import geo_convert
 import os
 
 
-
-
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="src/"))
-
 
 
 @app.get("/")
 def root():
     return FileResponse("src/html/index.html")
 
+
 #
 @app.post("/geoconvert")
 def geo_convert_url(key: str = None, file: bytes = File()):
     file_path = geo_convert(api_key=key, file=file)
-    return {'file_path': file_path}
+    return {"file_path": file_path}
+
 
 @app.get("/file/geoconvert/{file}")
 def get_geoconvert_file(file: str):
